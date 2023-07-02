@@ -22,6 +22,8 @@ void mainMenu(){
         scanf("%c",&option);
 
         switch (option) {
+
+            //swich case para cada opcion
             case 1  :
 
         }
