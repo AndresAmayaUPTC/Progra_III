@@ -1,7 +1,38 @@
 #include <stdio.h>
+#include <math.h>
 #include <ctype.h>
 #include <string.h>
 #include <unistd.h>
+
+
+
+
+void esEgolatra(){
+    int numero;
+    int suma = 0;
+
+    printf("\n   DIGITE EL NUMERO\n");
+    scanf("%d",&numero);
+    getchar();
+
+    int longitud = floor(log10(numero)) + 1;
+    char numeroCadena[longitud + 1];
+
+    sprintf(numeroCadena,"%d",numero);
+
+    for (int i = 0; i < longitud; ++i) {
+        int actual = numeroCadena[i] - '0';
+        int potencia = pow(actual,longitud);
+        suma += potencia;
+    }
+
+    if(suma == numero){
+        printf("\n   EL NUMERO ES EGOLATRA\n");
+    }else {
+        printf("\n   EL NUMERO NO ES EGOLATRA\n");
+    }
+    sleep(3);
+}
 
 void factoresPrimos() {
     long numero;
@@ -156,6 +187,12 @@ void mainMenu() {
             case '2':
                 factoresPrimos();
                 break;
+
+                case '3':
+                    break;
+                case '4':
+                    esEgolatra();
+                    break;
 
             default:
                 break;
