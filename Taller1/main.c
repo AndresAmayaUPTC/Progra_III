@@ -5,6 +5,128 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+void matrixProduct() {
+    int fm1, cm1, fm2, cm2;
+
+    printf("   INGRESE EL NUMERO DE FILAS DE LA PRIMERA MATRIZ\n");
+    scanf("%d", &fm1);
+    getchar();
+    printf("   INGRESE EL NUMERO DE COLUMNAS DE LA PRIMERA MATRIZ\n");
+    scanf("%d", &cm1);
+    getchar();
+    printf("   INGRESE EL NUMERO DE FILAS DE LA SEGUNDA MATRIZ\n");
+    scanf("%d", &fm2);
+    getchar();
+    printf("   INGRESE EL NUMERO DE COLUMNAS DE LA SEGUNDA MATRIZ\n");
+    scanf("%d", &cm2);
+    getchar();
+
+    int m1[fm1][cm1];
+    int m2[fm2][cm2];
+    int m3[fm1][cm2];
+
+
+    if (cm1 == fm2) {
+        for (
+                int i = 0;
+                i < fm1;
+                ++i) {
+            for (
+                    int j = 0;
+                    j < cm1;
+                    ++j) {
+                m1[i][j] =
+
+                        rand()
+
+                        % 9 + 1;
+            }
+        }
+        for (
+                int i = 0;
+                i < fm2;
+                ++i) {
+            for (
+                    int j = 0;
+                    j < cm2;
+                    ++j) {
+                m2[i][j] =
+
+                        rand()
+
+                        % 9 + 1;
+            }
+        }
+        for (
+                int i = 0;
+                i < fm1;
+                ++i) {
+            for (
+                    int j = 0;
+                    j < cm2;
+                    ++j) {
+                m3[i][j] = 0;
+                for (
+                        int k = 0;
+                        k < cm1;
+                        ++k) {
+                    m3[i][j] += m1[i][k] * m2[k][j];
+                }
+            }
+        }
+        printf("\nPRIMERA MATRIZ\n\n");
+        for (
+                int i = 0;
+                i < fm1;
+                ++i) {
+            printf("  [");
+            for (
+                    int j = 0;
+                    j < cm1;
+                    ++j) {
+                printf(" %d ", m1[i][j]);
+            }
+            printf("]\n");
+        }
+        printf("\nSEGUNDA MATRIZ\n\n");
+        for (
+                int i = 0;
+                i < fm2;
+                ++i) {
+            printf("  [");
+            for (
+                    int j = 0;
+                    j < cm2;
+                    ++j) {
+                printf(" %d ", m2[i][j]);
+            }
+            printf("]\n");
+        }
+        printf("\n    RESULTADO:\n\n");
+        for (
+                int i = 0;
+                i < fm1;
+                ++i) {
+            printf("  [");
+            for (
+                    int j = 0;
+                    j < cm2;
+                    ++j) {
+                if (m3[i][j] < 100) {
+                    printf("  %d ", m3[i][j]);
+                } else {
+                    printf(" %d ", m3[i][j]);
+                }
+            }
+            printf("]\n");
+        }
+        printf("\n");
+    } else {
+        printf("\n   LAS MATRICES NO SON MULTIPLICABLES\n");
+    }
+    sleep(3);
+}
+
 
 int funtionProduct(int matrizA[], int matrizB[]) {
     int sizeTotal = 0;
@@ -56,7 +178,7 @@ void menuProduct() {
 
                     printf("El producto punto de ambas matrices es: %d \n", funtionProduct(matrizA, matrizB));
                     sleep(3);
-                    bucleProduct=0;
+                    bucleProduct = 0;
                 } else {
                     printf("Ambas matrices deben ser iguales...\n");
                     bucleProduct = 1;
@@ -65,8 +187,6 @@ void menuProduct() {
         }
     }
 }
-
-
 
 
 void dates() {
@@ -311,6 +431,9 @@ void mainMenu() {
                 break;
             case '7':
                 menuProduct();
+                break;
+            case '8':
+                matrixProduct();
                 break;
 
             default:
