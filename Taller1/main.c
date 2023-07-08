@@ -6,6 +6,69 @@
 #include <stdlib.h>
 
 
+int funtionProduct(int matrizA[], int matrizB[]) {
+    int sizeTotal = 0;
+    size_t sizeMatrizA = sizeof(matrizA) / sizeof(matrizA[0]);
+    for (int i = 0; i < sizeMatrizA; ++i) {
+        sizeTotal += matrizA[i] * matrizB[i];
+    }
+    return sizeTotal;
+}
+
+void menuProduct() {
+
+    int sizeA, sizeB;
+    int bucleProduct = 1;
+
+    while (bucleProduct) {
+        printf("\t---> Producto punto <---\n"
+               "\t[0] Volver al menu principal\n\n"
+               "- Ingrese el tamano del vector A: \n");
+
+        scanf("%d", &sizeA);
+        if (sizeA == 0) {
+            printf("Regresando...");
+            getchar();
+            bucleProduct = 0;
+        } else {
+            printf("[0] Volver al menu principal\n\n"
+                   "- Ingrese el tamano del vector B: \n");
+            scanf("%d", &sizeB);
+
+            if (sizeB == 0) {
+                printf("Regresando...");
+                sleep(1);
+                bucleProduct = 0;
+            } else {
+                if (sizeA == sizeB) {
+                    int matrizA[sizeA], matrizB[sizeB];
+                    for (int i = 0; i < sizeA; i++) {
+                        printf("A [%d] = ", i + 1);
+                        scanf("%d", &matrizA[i]);
+                        getchar();
+                    }
+
+                    for (int j = 0; j < sizeB; j++) {
+                        printf("B [%d] = ", j + 1);
+                        scanf("%d", &matrizB[j]);
+                        getchar();
+                    }
+
+                    printf("El producto punto de ambas matrices es: %d \n", funtionProduct(matrizA, matrizB));
+                    sleep(3);
+                    bucleProduct=0;
+                } else {
+                    printf("Ambas matrices deben ser iguales...\n");
+                    bucleProduct = 1;
+                }
+            }
+        }
+    }
+}
+
+
+
+
 void dates() {
 
     char fecha[11];
@@ -245,6 +308,9 @@ void mainMenu() {
 
             case '6':
                 dates();
+                break;
+            case '7':
+                menuProduct();
                 break;
 
             default:
