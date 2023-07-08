@@ -3,32 +3,79 @@
 #include <ctype.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 
+void dates() {
+
+    char fecha[11];
+
+    printf("Ingrese una fecha en formato dd/mm/aaaa: ");
+    scanf("%s", fecha);
+    getchar();
+
+    int dia, mes, anio;
+    char *meses[] = {"enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre",
+                     "noviembre", "diciembre"};
+
+    // Validar el formato de la fecha
+    if (sscanf(fecha, "%d/%d/%d", &dia, &mes, &anio) != 3) {
+        printf("!!Fecha inválida!!\n");
+        sleep(2);
+        return;
+    }
+
+    // Validar los rangos de día, mes y año
+    if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || anio < 0) {
+        printf("!!Fecha inválida!!\n");
+        sleep(2);
+        return;
+    }
+
+    // Validar días específicos para algunos meses
+    if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
+        printf("!!Fecha inválida!!\n");
+        return;
+    }
+
+    if (mes == 2) {
+        // Validar febrero y los años bisiestos
+        int esBisiesto = (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
+        if ((esBisiesto && dia > 29) || (!esBisiesto && dia > 28)) {
+            printf("!!Fecha inválida!!\n");
+            sleep(2);
+            return;
+        }
+    }
+
+    // Obtener y mostrar la descripción de la fecha
+    printf("%d de %s de %d\n", dia, meses[mes - 1], anio);
+    sleep(3);
+}
 
 
-void esEgolatra(){
+void esEgolatra() {
     int numero;
     int suma = 0;
 
     printf("\n   DIGITE EL NUMERO\n");
-    scanf("%d",&numero);
+    scanf("%d", &numero);
     getchar();
 
     int longitud = floor(log10(numero)) + 1;
     char numeroCadena[longitud + 1];
 
-    sprintf(numeroCadena,"%d",numero);
+    sprintf(numeroCadena, "%d", numero);
 
     for (int i = 0; i < longitud; ++i) {
         int actual = numeroCadena[i] - '0';
-        int potencia = pow(actual,longitud);
+        int potencia = pow(actual, longitud);
         suma += potencia;
     }
 
-    if(suma == numero){
+    if (suma == numero) {
         printf("\n   EL NUMERO ES EGOLATRA\n");
-    }else {
+    } else {
         printf("\n   EL NUMERO NO ES EGOLATRA\n");
     }
     sleep(3);
@@ -188,11 +235,17 @@ void mainMenu() {
                 factoresPrimos();
                 break;
 
-                case '3':
-                    break;
-                case '4':
-                    esEgolatra();
-                    break;
+            case '3':
+                break;
+            case '4':
+                esEgolatra();
+                break;
+            case '5':
+                break;
+
+            case '6':
+                dates();
+                break;
 
             default:
                 break;
