@@ -6,7 +6,7 @@
 
 void romanNum() {
 
-    printf("\t***Numero Romano***\n"
+    printf("\t        ***Numero Romano***\n"
            "\t1 - Convertir Numero Romano a decimal\n"
            "\t0 - Volver\n");
     char op;
@@ -19,6 +19,13 @@ void romanNum() {
             char romanNum[10];
             scanf("%c", &romanNum);
             getchar();
+
+            int k = 0;
+            while (romanNum[k] != '\0') {
+                romanNum[k] = toupper(romanNum[k]);
+                k++;
+            }
+
             int i;
             int decimalNum = 0;
             for (i = strlen(romanNum) - 1; i >= 0; i--) {
@@ -57,7 +64,8 @@ void romanNum() {
                         decimalNum += 1000;
                         break;
                     default:
-                        printf("Número romano inválido\n");
+                        printf("!!Número romano inválido!!\n");
+                        sleep(2);
                         return -1;  // Valor de retorno inválido para indicar error
                 }
 
@@ -67,7 +75,7 @@ void romanNum() {
             printf("El caracter ingresado equiale a %d en decimal\n",decimalNum);
 
 
-            sleep(2);
+            sleep(3);
             break;
 
         case '0':
@@ -76,6 +84,7 @@ void romanNum() {
 
         default:
             printf("Opcion no Valida!!\n");
+            sleep(2);
             break;
 
 
@@ -87,7 +96,7 @@ void romanNum() {
 
 void mainMenu() {
 
-    char *opciones = ">>>>>MENU PRINCIPAL<<<<<\n\n"
+    char *opciones = "          >>>>>MENU PRINCIPAL<<<<<\n\n"
                      "\t1 - Numero Romano\n"
                      "\t2 - Fatores Primos\n"
                      "\t3 - Borrar Espacios\n"
@@ -106,13 +115,16 @@ void mainMenu() {
 
         switch (option) {
 
-            //swich case para cada opcion
+
             case '1':
                 romanNum();
                 break;
 
             case '2':
-                printf("Hola");
+
+                break;
+
+            default:
                 break;
 
         }
