@@ -3,6 +3,41 @@
 #include <string.h>
 #include <unistd.h>
 
+void factoresPrimos() {
+    long numero;
+    long numeroAux;
+    long iterador = 0;
+
+    printf("   INGRESE UN NUMERO (NO MAYOR A 2147483646)\n");
+
+    scanf("%d", &numero);
+    getchar();
+
+    numeroAux = numero;
+
+    printf("\n  %d = ", numeroAux);
+
+    for (long i = 2; numero > 1; ++i) {
+        if (iterador != 0) {
+            printf(" * ");
+        }
+        iterador = 0;
+        if (numero % i == 0) {
+            while (numero % i == 0) {
+                iterador += 1;
+                numero = numero / i;
+            }
+            if (iterador > 1) {
+                printf("%d^%d", i, iterador);
+            } else if (iterador == 1) {
+                printf("%d", i);
+            }
+        }
+    }
+    printf("\n\n");
+    sleep(3);
+}
+
 
 void romanNum() {
 
@@ -72,7 +107,7 @@ void romanNum() {
             }
 
 
-            printf("El caracter ingresado equiale a %d en decimal\n",decimalNum);
+            printf("El caracter ingresado equiale a %d en decimal\n", decimalNum);
 
 
             sleep(3);
@@ -90,8 +125,6 @@ void romanNum() {
 
     }
 }
-
-
 
 
 void mainMenu() {
@@ -121,7 +154,7 @@ void mainMenu() {
                 break;
 
             case '2':
-
+                factoresPrimos();
                 break;
 
             default:
