@@ -264,6 +264,30 @@ void esEgolatra() {
     sleep(3);
 }
 
+void quitaEspacios() {
+
+    char cadena[100], cadenasin[100];
+
+    printf("Introduzca la cadena: ");
+
+    fgets(cadena, 100, stdin);
+
+
+
+    int i, j;
+    i = 0;
+    j = 0;
+    while (cadena[i] != '\0') {
+        if (cadena[i] != ' ') {
+            cadenasin[j] = cadena[i];
+            j++;
+        }
+        i++;
+    }
+    printf("La cadena es %s", cadenasin);
+    sleep(3);
+}
+
 void factoresPrimos() {
     long numero;
     long numeroAux;
@@ -419,6 +443,7 @@ void mainMenu() {
                 break;
 
             case '3':
+                quitaEspacios();
                 break;
             case '4':
                 esEgolatra();
