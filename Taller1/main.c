@@ -5,6 +5,52 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+void magicMatrix() {
+
+    int numero;
+    printf("Ingrese el número de elementos: ");
+    scanf("%d", &numero);
+    getchar();
+
+
+    if (numero <= 0 || numero % 2 == 0) {
+        printf("El número de elementos debe ser un número impar y mayor a cero.\n");
+        sleep(2);
+        return;
+    }
+
+    int matriz[numero][numero];
+    int fila = 0;
+    int columna = numero / 2;
+    int valor = 1;
+
+    while (valor <= numero * numero) {
+        matriz[fila][columna] = valor;
+
+        int siguienteFila = (fila - 1 + numero) % numero;
+        int siguienteColumna = (columna + 1) % numero;
+
+        if (matriz[siguienteFila][siguienteColumna] == 0) {
+            fila = siguienteFila;
+            columna = siguienteColumna;
+        } else {
+            fila = (fila + 1) % numero;
+        }
+
+        valor++;
+    }
+
+    printf("Matriz mágica:\n");
+    for (int i = 0; i < numero; i++) {
+        for (int j = 0; j < numero; j++) {
+            printf("%2d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+    sleep(4);
+    printf("\n \n");
+}
+
 void matrixProduct() {
     int fm1, cm1, fm2, cm2;
 
@@ -236,6 +282,51 @@ void dates() {
     sleep(3);
 }
 
+void esNumeroMagico() {
+
+    int num;
+    printf("Ingrese un número: ");
+    scanf("%d", &num);
+    getchar();
+
+
+    int invertido = 0;
+    int ordenadoAsc = 0;
+    int ordenadoDesc = 0;
+    int temp = num;
+
+    // Invertir el número
+    while (temp != 0) {
+        invertido = invertido * 10 + temp % 10;
+        temp /= 10;
+    }
+
+    // Ordenar los dígitos en forma ascendente
+    temp = num;
+    while (temp != 0) {
+        int digito = temp % 10;
+        ordenadoAsc = ordenadoAsc * 10 + digito;
+        temp /= 10;
+    }
+
+    // Ordenar los dígitos en forma descendente
+    while (num != 0) {
+        int digito = num % 10;
+        ordenadoDesc = ordenadoDesc * 10 + digito;
+        num /= 10;
+    }
+
+    // Calcular el resultado
+    int resultado = invertido - ordenadoAsc;
+
+    // Comprobar si es un número mágico
+    if (resultado == num) {
+        printf("*SI* es un numero magico\n");
+    } else {
+        printf("*NO* es un numero magico\n");
+    }
+    sleep(3);
+}
 
 void esEgolatra() {
     int numero;
@@ -271,7 +362,6 @@ void quitaEspacios() {
     printf("Introduzca la cadena: ");
 
     fgets(cadena, 100, stdin);
-
 
 
     int i, j;
@@ -449,6 +539,7 @@ void mainMenu() {
                 esEgolatra();
                 break;
             case '5':
+                esNumeroMagico();
                 break;
 
             case '6':
@@ -461,7 +552,15 @@ void mainMenu() {
                 matrixProduct();
                 break;
 
+            case '9':
+                magicMatrix();
+                break;
+
             default:
+                if(option != 'x' && option != 'X'){
+                    printf("Opcion No valida\n");
+                    sleep(2);
+                }
                 break;
 
         }
